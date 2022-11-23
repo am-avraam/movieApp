@@ -1,0 +1,40 @@
+ .ant-tabs {
+  /* display: inline-block; */
+  width: fit-content;
+  text-align: center;
+  align-self: center;
+  align-content: center;
+
+  margin: 0 auto;
+  margin-top: 20px;
+}
+/*
+.ant-tabs-nav::before {
+  margin: 0 auto;
+}
+
+.ant-tabs-nav-wrap::before {
+  position: static;
+}
+
+.ant-tabs-nav-wrap::after {
+  position: static;
+}
+*/
+
+.ant-tabs >.ant-tabs-nav .ant-tabs-nav-wrap::before,
+.ant-tabs >.ant-tabs-nav .ant-tabs-nav-wrap::after {
+display: none;
+}
+
+.ant-tabs-tab-btn {
+  padding: 0 10px;
+}
+
+.ant-tabs-nav-list {
+  margin: 0 auto;
+}
+
+/* .ant-tabs-nav-wrap {
+  justify-content: space-between;
+}  */

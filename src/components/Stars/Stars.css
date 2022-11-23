@@ -1,0 +1,19 @@
+.ant-rate {
+  width: 105%;
+  min-height: 60px;
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.ant-rate-star, .ant-rate-star-full {
+  width: 14.1px;
+  height: 10px;
+  margin-right: 15px;
+  
+}
+
+.ant-rate-star .ant-rate-star-full {
+  margin-right: 10px;
+}
