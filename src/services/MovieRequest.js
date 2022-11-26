@@ -10,16 +10,19 @@ export default class MovieRequest {
   id = 0
 
   cutArticle = (title, description) => {
-    if (title.length < 19) {
+    if (title && title.length < 19) {
       return description.slice(0, description.indexOf(' ', 110)) + '...'
     } else return description.slice(0, description.indexOf(' ', 70)) + '...'
   }
 
-  async getResource(pageNum = 1, queryStr = 'return') {
+  async getResource(pageNum = 1, queryStr = 'return', search) {
     let page = `page=${pageNum}`
     let query = `query=${queryStr}`
 
     let fullApi = `${this._apiBase}?${this._apiKey}&${this.langQuery}&${query}&${page}&${this._contentToAdults}`
+    if (search === false) {
+      fullApi = 'https://api.themoviedb.org/3/trending/all/week?api_key=6a2dba1cf42e77b0077aa2784f3cd0bf'
+    }
 
     const res = await fetch(fullApi)
 
@@ -27,26 +30,35 @@ export default class MovieRequest {
       throw new Error('Something went wrong')
     }
     return await res.json()
-
-    // return <AlertByError />
   }
 
-  async getMovieList(pageNum) {
-    const resp = await this.getResource(pageNum)
-    console.log(resp)
+  async getMovieList(pageNum, query, search) {
+    const resp = await this.getResource(pageNum, query, search)
+    const pageCount = resp.total_pages
+
     let preparedToRender = resp.results.map((el) => {
+      let date = null
+      if (el.release_date) {
+        date = format(new Date(el.release_date), 'MMMM d, yyyy')
+      } else if (el.first_air_date) {
+        date = format(new Date(el.first_air_date), 'MMMM d, yyyy')
+      }
+
+      let name = el.original_title || el.name
       return {
         id: this.id++,
-        name: el.original_title,
+        name: name,
         jenres: el.genre_ids,
         description: this.cutArticle(el.original_title, el.overview),
         pathToPoster: `https://image.tmdb.org/t/p/original/${el.poster_path}`,
-        date: format(new Date(el.release_date), 'MMMM d, yyyy'),
+        date: date,
         loading: false,
-        rate: el.vote_average,
+        rate: el.vote_average.toFixed(1),
       }
     })
 
-    return preparedToRender.slice(0, 6)
+    const responseArr = [preparedToRender.slice(0, 6), pageCount]
+
+    return responseArr
   }
 }

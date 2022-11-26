@@ -11,23 +11,49 @@ import Loading from '../Loading/Loading'
 import AlertByError from '../AlertByError/AlertByError'
 
 export default class App extends Component {
-  constructor() {
-    super()
-    this.updateList()
-  }
-
   offlineMessage = 'Sorry, you are out of network.'
   request = new MovieRequest()
-  id = 0
 
   state = {
+    request: '',
     movieData: [],
     error: [],
     loading: true,
+    search: true,
+    currentPage: 1,
+    pagesCount: null,
+  }
+
+  toggleSearch = () => {
+    this.togglePage()
+    this.toggleLoading()
+    this.setState(({ search }) => {
+      return { search: !search }
+    })
+  }
+
+  toggleLoading = () => {
+    this.setState(() => {
+      return { loading: !this.state.loading }
+    })
   }
 
   togglePage = (pageNum) => {
-    this.updateList(pageNum)
+    this.toggleLoading()
+    if (pageNum) {
+      if (!this.state.search) {
+        this.updateList(pageNum, undefined, this.state.search)
+      } else this.updateList(pageNum, this.state.request)
+      this.setState(() => {
+        return {
+          currentPage: pageNum,
+        }
+      })
+    } else {
+      this.setState({
+        currentPage: 1,
+      })
+    }
   }
 
   onError = (err) => {
@@ -36,25 +62,47 @@ export default class App extends Component {
     })
   }
 
-  updateList(pageNum = 1) {
+  updateList = (pageNum = 1, query = 'return', search = null) => {
     this.request
-      .getMovieList(pageNum)
-      .then((list) => {
+      .getMovieList(pageNum, query, search)
+      .then((responseArr) => {
         this.setState(() => {
-          return { movieData: list, loading: false }
+          return { movieData: responseArr[0], request: query, pagesCount: responseArr[1] }
         })
       })
       .catch(this.onError)
   }
 
-  render() {
-    let error = this.state.error[0] ? <AlertByError error={this.state.error[1]} /> : null
-    let loading = this.state.loading && !this.state.error.length ? <Loading /> : null
+  toSearch = (query) => {
+    query = query ? query : 'return'
+    this.updateList(1, query)
+  }
 
+  componentDidMount() {
+    this.updateList()
+    // this.toggleLoading()
+  }
+
+  componentDidUpdate(a, prev) {
+    if (this.state.loading == true && prev.loading) {
+      this.toggleLoading()
+    }
+  }
+
+  render() {
+    let alertByErrorTemplate = <AlertByError error={this.state.error[1]} />
+    let paginationTemplate = <Pages togglePage={this.togglePage} currentPage={this.state.currentPage} />
+    let searchInputTemplate = <FormInput toSearch={this.toSearch} togglePage={this.togglePage} />
+    let noResultWarningTemplate = <AlertByError error={'nothing'} />
+    let error = this.state.error[0] ? alertByErrorTemplate : null
+    let loading = this.state.loading && !this.state.error.length ? <Loading /> : null
+    let pagination = this.state.pagesCount > 6 ? paginationTemplate : null
+    let searchInput = this.state.search ? searchInputTemplate : null
+    let noResultWarning = this.state.pagesCount != null && this.state.pagesCount < 1 ? noResultWarningTemplate : null
     let contentLoaded = !this.state.loading ? (
       <>
         <MovieList {...this.state} />
-        <Pages togglePage={this.togglePage} />
+        {pagination}
       </>
     ) : null
 
@@ -62,9 +110,11 @@ export default class App extends Component {
       <>
         <Online>
           <div className="app">
-            <SearchTab />
-            <FormInput />
+            <SearchTab updateList={this.updateList} toggleSearch={this.toggleSearch} searchStatus={this.state.search} />
+
+            {searchInput}
             {error}
+            {noResultWarning}
             {loading}
             {contentLoaded}
           </div>

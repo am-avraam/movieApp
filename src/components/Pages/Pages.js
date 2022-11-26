@@ -1,4 +1,16 @@
+import { Component } from 'react'
 import { Pagination } from 'antd'
 import './Pages.css'
-const Pages = ({ togglePage }) => <Pagination onChange={(page) => togglePage(page)} defaultCurrent={1} total={50} />
-export default Pages
+
+export default class Pages extends Component {
+  // const Pages = ({ togglePage }) => {
+  //   let current = this.props.current
+  state = {
+    current: 1,
+  }
+
+  render() {
+    const { togglePage, currentPage } = this.props
+    return <Pagination onChange={(page) => togglePage(page)} current={currentPage} total={50} />
+  }
+}
