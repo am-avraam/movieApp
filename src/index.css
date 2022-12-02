@@ -1,4 +1,5 @@
 
+
 .root {
   max-width: 1010px;
   margin: 0 auto;
@@ -29,10 +30,12 @@
   list-style-type: none;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
   position: relative;
+  height: 281px;
 }
 
 .movies__img {
   width: 183px;
+  height: 281px;
   display: inline-block;
   text-align: center;
   align-self: center;
@@ -42,11 +45,13 @@
   padding: 12px 20px;
   padding-bottom: 0;
   align-self: flex-start;
-
+  position: relative;
   display: flex;
   height: calc(100% - 12px);
   flex-wrap: wrap;
   flex-direction: column;
+  max-height: 269px;
+  max-width: 268px;
 }
 
 .movies__name {
@@ -70,6 +75,7 @@
 
 .movies__jenres {
   margin: 0;
+  width: calc(100% + 20px);
 }
 
 .movies__jenre {
@@ -78,7 +84,8 @@
   font-weight: 400;
   font-size: 12px;
   line-height: 1.7;
-  width: 44px;
+  width: max-content;
+  padding:  0 5px;
   text-align: center;
   height: 18px;
   vertical-align: middle;
@@ -95,7 +102,9 @@
   line-height: 22px;
   /* height: calc(100% - 170px); */
   margin: 0;
-  flex-grow: 1;
+  /* flex-grow: 1; */
+  max-height: 130px;
+  width: 100%;
 }
 
 .movies__rate {
@@ -117,4 +126,75 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+
+@media screen and (max-width: 720px) {
+  .root {
+    width: 420px;
+  }
+
+  .app {
+    width: 420px;
+    padding: 0 16px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .movies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-top: 10px;
+  }
+
+  .ant-input {
+    width: 388px;
+  }
+
+  .movies__card {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    height: 245px;
+    display: block;
+  }
+
+  .movies__img {
+    width: 60px;
+    height: 91px;
+    display: inline;
+    vertical-align: top;
+    text-align: none;
+    align-self: none;
+  }
+
+  .movies__description {
+    display: inline-block;
+    position: static;
+    padding: 0;
+    padding-left: 13px;
+    width: 256px;
+  }
+
+  .movies__name {
+    width: 100%;
+  }
+
+  .movies__rate {
+    margin: 0;
+    top: 5px;
+    right: 8px;
+  }
+
+  .movies__intro {
+    padding-top: 22px;
+    position: relative;
+    left: -73px;
+    width: 368px;
+  }
+
+  .ant-rate {
+    right: 10px;
+  }
 }

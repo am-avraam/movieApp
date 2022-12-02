@@ -1,0 +1,9 @@
+.ant-input {
+  height: 40px;
+}
+
+@media screen and (max-width: 720px) {
+  .ant-input {
+    width: 388px;
+  }
+}

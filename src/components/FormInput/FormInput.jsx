@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './FormInput.css'
 import { Input } from 'antd'
 import { debounce } from 'lodash'
 

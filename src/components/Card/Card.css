@@ -1,0 +1,169 @@
+.movies__rate_grade_fail {
+border-color: #E90000;
+}
+
+.movies__rate_grade_satisfactory {
+  border-color: #E97E00
+}
+
+.movies__rate_grade_good {
+  border-color: #E9D100;
+}
+
+.movies__rate_grade_verygood {
+  border-color: #66E900;
+}
+
+.movies__card {
+  display: grid;
+  grid-template-columns: 183px auto;
+  list-style-type: none;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+  position: relative;
+  height: 281px;
+}
+
+.movies__img {
+  width: 183px;
+  height: 281px;
+  display: inline-block;
+  text-align: center;
+  align-self: center;
+}
+
+.movies__description {
+  padding: 12px 20px;
+  padding-bottom: 0;
+  align-self: flex-start;
+  position: relative;
+  display: flex;
+  height: calc(100% - 12px);
+  flex-wrap: wrap;
+  flex-direction: column;
+  max-height: 269px;
+  max-width: 268px;
+}
+
+.movies__name {
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  max-height: min-content;
+  width: 195px;
+}
+
+.movies__date {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 22px;
+  color: #827E7E;
+  margin: 7px 0;
+}
+
+.movies__jenres {
+  margin: 0;
+  width: calc(100% + 20px);
+}
+
+.movies__jenre {
+  display: inline-block;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.7;
+  width: max-content;
+  padding:  0 5px;
+  text-align: center;
+  height: 18px;
+  vertical-align: middle;
+  margin-right: 8px;
+  color: rgba(0, 0, 0, 0.65);
+  background: #FAFAFA;
+  border: 1px solid #D9D9D9;
+  border-radius: 2px;
+}
+
+.movies__intro {
+  padding-top: 10px;
+  font-size: 12px;
+  line-height: 22px;
+  /* height: calc(100% - 170px); */
+  margin: 0;
+  /* flex-grow: 1; */
+  max-height: 130px;
+  width: 100%;
+}
+
+.movies__rate {
+  /* display: inline-block; */
+  margin: 0;
+  width: 30px;
+  height: 30px;
+  right: 0;
+  border: 2px solid #E9D100;
+  border-radius: 50%;
+  position: absolute;
+  margin-right: 9px;
+  font-size: 12px;
+  line-height: 22px;
+  font-family: 'Inter';
+  font-style: normal;
+  text-align: center;
+  vertical-align: middle;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+@media screen and (max-width: 720px) {
+
+  .movies__card {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    height: 245px;
+    display: block;
+  }
+
+  .movies__img {
+    width: 60px;
+    height: 91px;
+    display: inline;
+    vertical-align: top;
+    text-align: none;
+    align-self: none;
+  }
+
+  .movies__description {
+    display: inline-block;
+    position: static;
+    padding: 0;
+    padding-left: 13px;
+    width: 256px;
+  }
+
+  .movies__name {
+    width: 100%;
+  }
+
+  .movies__rate {
+    margin: 0;
+    top: 5px;
+    right: 8px;
+  }
+
+  .movies__intro {
+    padding-top: 22px;
+    position: relative;
+    left: -73px;
+    width: 368px;
+  }
+
+  .ant-rate {
+    right: 10px;
+  }
+}

@@ -29,6 +29,7 @@
       "ignoredNodes": [ "ConditionalExpression"] 
       }
     ],
+    "no-unused-vars": 0,
     "prettier/prettier": "error",
     "linebreak-style": [0, "unix"],
     "quotes": ["error", "single"],
