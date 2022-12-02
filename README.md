@@ -5,7 +5,7 @@
 
 ## Ссылка на Vercel
 
-[Click](movie-app-am-avraam.vercel.app 'Come on')
+[Click](http://movie-app-am-avraam.vercel.app/ 'Come on')
 
 <!-- ### Функционал
 
