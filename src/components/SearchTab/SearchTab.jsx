@@ -8,9 +8,6 @@ export default class SearchTab extends Component {
   }
 
   onChange = () => {
-    // this.setState(({ search }) => {
-    //   return { search: !search }
-    // })
     this.props.toggleSearch()
     this.props.updateList(undefined, undefined, !this.props.searchStatus)
   }

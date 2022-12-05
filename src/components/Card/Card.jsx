@@ -1,9 +1,9 @@
 import { Component } from 'react'
 
 import Stars from '../Stars/Stars'
-import Loading from '../Loading/Loading'
+import Loading from '../../services/Loading/Loading'
 import './Card.css'
-import { GuestSessionConsumer } from '../GuestSessionContext/GuestSessionContext'
+import { GuestSessionConsumer } from '../../services/GuestSessionContext'
 
 export default class Card extends Component {
   state = {

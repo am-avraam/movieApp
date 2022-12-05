@@ -9,9 +9,9 @@ import GuestSession from '../../services/GuestSession'
 import Pages from '../Pages/Pages'
 import FormInput from '../FormInput/FormInput'
 import SearchTab from '../SearchTab/SearchTab'
-import Loading from '../Loading/Loading'
-import AlertByError from '../AlertByError/AlertByError'
-import { GuestSessionProvider } from '../GuestSessionContext/GuestSessionContext'
+import Loading from '../../services/Loading/Loading'
+import AlertByError from '../../services/AlertByError/AlertByError'
+import { GuestSessionProvider } from '../../services/GuestSessionContext'
 
 export default class App extends Component {
   offlineMessage = 'Sorry, you are out of network.'
